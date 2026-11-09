@@ -1,0 +1,324 @@
+
+PROPERTY: output is sorted, valid, and strictly separated
+
+> pbt-fast-check@1.0.0 test:intervals
+> vitest run test/intervals.test.ts
+
+
+ RUN  v4.1.12 /Users/ahmedaljabri/.codex/.chatgpt-projects/g-p-6a91870699dc8191a08a5faa681d1108/recitation-9
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  08:39:23
+   Duration  113ms (transform 26ms, setup 23ms, import 16ms, tests 5ms, environment 0ms)
+
+
+> pbt-fast-check@1.0.0 mutants:intervals
+> tsx scripts/mutants.ts intervals
+
+
+Checking test/intervals.test.ts against the correct implementation (5 runs)...
+  ✔ all 2 test(s) pass
+
+Running against 7 mutants (5 runs each)...
+
+  ✔ assumesSorted           killed  by: every input interval lies inside some output interval
+      Counterexample: [[[0,0],[-1,0]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ lexicographicSort       killed  by: every input interval lies inside some output interval
+      Counterexample: [[[-10,0],[-11,0]]]
+      AssertionError: expected [ [ -11, +0 ] ] to deeply equal []
+  ✔ touchingNotMerged       killed  by: output is sorted, valid, and strictly separated
+      Counterexample: [[[0,11],[11,11]]]
+      AssertionError: expected 11 to be less than 11
+  ✘ mergesIntegerNeighbors  SURVIVED
+  ✔ keepsLastEnd            killed  by: every input interval lies inside some output interval
+      Counterexample: [[[0,0],[-1,1]]]
+      AssertionError: expected [ [ -1, 1 ] ] to deeply equal []
+  ✔ dropsLast               killed  by: every input interval lies inside some output interval
+      Counterexample: [[[0,0]]]
+      AssertionError: expected [ [ +0, +0 ] ] to deeply equal []
+  ✘ aliasesInput            SURVIVED
+
+Mutation score: 5/7 killed (71%)
+
+PROPERTY: input and output cover the same real points
+
+> pbt-fast-check@1.0.0 test:intervals
+> vitest run test/intervals.test.ts
+
+
+ RUN  v4.1.12 /Users/ahmedaljabri/.codex/.chatgpt-projects/g-p-6a91870699dc8191a08a5faa681d1108/recitation-9
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  08:39:28
+   Duration  108ms (transform 22ms, setup 18ms, import 16ms, tests 15ms, environment 0ms)
+
+
+> pbt-fast-check@1.0.0 mutants:intervals
+> tsx scripts/mutants.ts intervals
+
+
+Checking test/intervals.test.ts against the correct implementation (5 runs)...
+  ✔ all 3 test(s) pass
+
+Running against 7 mutants (5 runs each)...
+
+  ✔ assumesSorted           killed  by: every input interval lies inside some output interval; input and output cover the same real points
+      Counterexample: [[[0,0],[-1,0]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ lexicographicSort       killed  by: every input interval lies inside some output interval; input and output cover the same real points
+      Counterexample: [[[-10,0],[-11,0]]]
+      AssertionError: expected [ [ -11, +0 ] ] to deeply equal []
+  ✔ touchingNotMerged       killed  by: output is sorted, valid, and strictly separated
+      Counterexample: [[[3,3],[0,3]]]
+      AssertionError: expected 3 to be less than 3
+  ✔ mergesIntegerNeighbors  killed  by: input and output cover the same real points
+      Counterexample: [[[-1,0],[-2,-2]]]
+      AssertionError: expected true to be false // Object.is equality
+  ✔ keepsLastEnd            killed  by: every input interval lies inside some output interval; input and output cover the same real points
+      Counterexample: [[[0,0],[-1,1]]]
+      AssertionError: expected [ [ -1, 1 ] ] to deeply equal []
+  ✔ dropsLast               killed  by: every input interval lies inside some output interval; input and output cover the same real points
+      Counterexample: [[[0,0]]]
+      AssertionError: expected [ [ +0, +0 ] ] to deeply equal []
+  ✘ aliasesInput            SURVIVED
+
+Mutation score: 6/7 killed (86%)
+
+PROPERTY: permuting and duplicating input preserves the result
+
+> pbt-fast-check@1.0.0 test:intervals
+> vitest run test/intervals.test.ts
+
+
+ RUN  v4.1.12 /Users/ahmedaljabri/.codex/.chatgpt-projects/g-p-6a91870699dc8191a08a5faa681d1108/recitation-9
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  08:39:32
+   Duration  111ms (transform 22ms, setup 18ms, import 16ms, tests 17ms, environment 0ms)
+
+
+> pbt-fast-check@1.0.0 mutants:intervals
+> tsx scripts/mutants.ts intervals
+
+
+Checking test/intervals.test.ts against the correct implementation (5 runs)...
+  ✔ all 4 test(s) pass
+
+Running against 7 mutants (5 runs each)...
+
+  ✔ assumesSorted           killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[-1,0]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ lexicographicSort       killed  by: every input interval lies inside some output interval; input and output cover the same real points
+      Counterexample: [[[-1,0],[-2,0]]]
+      AssertionError: expected [ [ -2, +0 ] ] to deeply equal []
+  ✔ touchingNotMerged       killed  by: output is sorted, valid, and strictly separated; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[0,0]]]
+      AssertionError: expected 0 to be less than 0
+  ✔ mergesIntegerNeighbors  killed  by: input and output cover the same real points
+      Counterexample: [[[-14,0],[-15,-15]]]
+      AssertionError: expected true to be false // Object.is equality
+  ✔ keepsLastEnd            killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[-1,0],[-1,-1]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ dropsLast               killed  by: every input interval lies inside some output interval; input and output cover the same real points
+      Counterexample: [[[0,0]]]
+      AssertionError: expected [ [ +0, +0 ] ] to deeply equal []
+  ✘ aliasesInput            SURVIVED
+
+Mutation score: 6/7 killed (86%)
+
+PROPERTY: merging twice equals merging once
+
+> pbt-fast-check@1.0.0 test:intervals
+> vitest run test/intervals.test.ts
+
+
+ RUN  v4.1.12 /Users/ahmedaljabri/.codex/.chatgpt-projects/g-p-6a91870699dc8191a08a5faa681d1108/recitation-9
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  08:39:36
+   Duration  110ms (transform 22ms, setup 17ms, import 16ms, tests 17ms, environment 0ms)
+
+
+> pbt-fast-check@1.0.0 mutants:intervals
+> tsx scripts/mutants.ts intervals
+
+
+Checking test/intervals.test.ts against the correct implementation (5 runs)...
+  ✔ all 5 test(s) pass
+
+Running against 7 mutants (5 runs each)...
+
+  ✔ assumesSorted           killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[-1,0]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ lexicographicSort       killed  by: every input interval lies inside some output interval; input and output cover the same real points
+      Counterexample: [[[-1,0],[-2,0]]]
+      AssertionError: expected [ [ -2, +0 ] ] to deeply equal []
+  ✔ touchingNotMerged       killed  by: output is sorted, valid, and strictly separated; permuting and duplicating input preserves the result
+      Counterexample: [[[-11,0],[-12,-11]]]
+      AssertionError: expected -11 to be less than -11
+  ✔ mergesIntegerNeighbors  killed  by: input and output cover the same real points
+      Counterexample: [[[4,4],[0,3]]]
+      AssertionError: expected true to be false // Object.is equality
+  ✔ keepsLastEnd            killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[-1,1]]]
+      AssertionError: expected [ [ -1, 1 ] ] to deeply equal []
+  ✔ dropsLast               killed  by: every input interval lies inside some output interval; input and output cover the same real points; merging twice equals merging once
+      Counterexample: [[[0,0]]]
+      AssertionError: expected [ [ +0, +0 ] ] to deeply equal []
+  ✘ aliasesInput            SURVIVED
+
+Mutation score: 6/7 killed (86%)
+
+PROPERTY: already separated intervals are unchanged
+
+> pbt-fast-check@1.0.0 test:intervals
+> vitest run test/intervals.test.ts
+
+
+ RUN  v4.1.12 /Users/ahmedaljabri/.codex/.chatgpt-projects/g-p-6a91870699dc8191a08a5faa681d1108/recitation-9
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  08:39:40
+   Duration  116ms (transform 23ms, setup 18ms, import 17ms, tests 18ms, environment 0ms)
+
+
+> pbt-fast-check@1.0.0 mutants:intervals
+> tsx scripts/mutants.ts intervals
+
+
+Checking test/intervals.test.ts against the correct implementation (5 runs)...
+  ✔ all 6 test(s) pass
+
+Running against 7 mutants (5 runs each)...
+
+  ✔ assumesSorted           killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[-1,0]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ lexicographicSort       killed  by: every input interval lies inside some output interval; input and output cover the same real points; already separated intervals are unchanged
+      Counterexample: [[[-10,0],[-11,0]]]
+      AssertionError: expected [ [ -11, +0 ] ] to deeply equal []
+  ✔ touchingNotMerged       killed  by: output is sorted, valid, and strictly separated; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[0,0]]]
+      AssertionError: expected 0 to be less than 0
+  ✔ mergesIntegerNeighbors  killed  by: input and output cover the same real points; already separated intervals are unchanged
+      Counterexample: [[[-10,0],[-11,-11]]]
+      AssertionError: expected true to be false // Object.is equality
+  ✔ keepsLastEnd            killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,1],[0,0]]]
+      AssertionError: expected [ [ +0, 1 ] ] to deeply equal []
+  ✔ dropsLast               killed  by: every input interval lies inside some output interval; input and output cover the same real points; merging twice equals merging once; already separated intervals are unchanged
+      Counterexample: [[[0,0]]]
+      AssertionError: expected [ [ +0, +0 ] ] to deeply equal []
+  ✘ aliasesInput            SURVIVED
+
+Mutation score: 6/7 killed (86%)
+
+PROPERTY: merging does not modify the input or its intervals
+
+> pbt-fast-check@1.0.0 test:intervals
+> vitest run test/intervals.test.ts
+
+
+ RUN  v4.1.12 /Users/ahmedaljabri/.codex/.chatgpt-projects/g-p-6a91870699dc8191a08a5faa681d1108/recitation-9
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  08:39:45
+   Duration  114ms (transform 22ms, setup 17ms, import 17ms, tests 19ms, environment 0ms)
+
+
+> pbt-fast-check@1.0.0 mutants:intervals
+> tsx scripts/mutants.ts intervals
+
+
+Checking test/intervals.test.ts against the correct implementation (5 runs)...
+  ✔ all 7 test(s) pass
+
+Running against 7 mutants (5 runs each)...
+
+  ✔ assumesSorted           killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[-1,0]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ lexicographicSort       killed  by: every input interval lies inside some output interval; input and output cover the same real points; already separated intervals are unchanged
+      Counterexample: [[[-1,0],[-2,0]]]
+      AssertionError: expected [ [ -2, +0 ] ] to deeply equal []
+  ✔ touchingNotMerged       killed  by: output is sorted, valid, and strictly separated; permuting and duplicating input preserves the result
+      Counterexample: [[[-1,0],[-2,-1]]]
+      AssertionError: expected -1 to be less than -1
+  ✔ mergesIntegerNeighbors  killed  by: input and output cover the same real points; already separated intervals are unchanged
+      Counterexample: [[[3,3],[0,2]]]
+      AssertionError: expected true to be false // Object.is equality
+  ✔ keepsLastEnd            killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[-1,1]]]
+      AssertionError: expected [ [ -1, 1 ] ] to deeply equal []
+  ✔ dropsLast               killed  by: every input interval lies inside some output interval; input and output cover the same real points; merging twice equals merging once; already separated intervals are unchanged
+      Counterexample: [[[0,0]]]
+      AssertionError: expected [ [ +0, +0 ] ] to deeply equal []
+  ✔ aliasesInput            killed  by: merging does not modify the input or its intervals
+      Counterexample: [[[-3,10],[-4,10],[-5,10]]]
+      AssertionError: expected [ [ -3, 10 ], [ -4, 10 ], [ -5, 10 ] ] to deeply equal [ [ -3, 10 ], [ -4, 10 ], [ -5, +0 ] ]
+
+Mutation score: 7/7 killed (100%)
+
+PROPERTY: intervals sharing an endpoint merge
+
+> pbt-fast-check@1.0.0 test:intervals
+> vitest run test/intervals.test.ts
+
+
+ RUN  v4.1.12 /Users/ahmedaljabri/.codex/.chatgpt-projects/g-p-6a91870699dc8191a08a5faa681d1108/recitation-9
+
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  08:39:50
+   Duration  120ms (transform 24ms, setup 18ms, import 18ms, tests 21ms, environment 0ms)
+
+
+> pbt-fast-check@1.0.0 mutants:intervals
+> tsx scripts/mutants.ts intervals
+
+
+Checking test/intervals.test.ts against the correct implementation (5 runs)...
+  ✔ all 8 test(s) pass
+
+Running against 7 mutants (5 runs each)...
+
+  ✔ assumesSorted           killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,0],[-1,0]]]
+      AssertionError: expected [ [ -1, +0 ] ] to deeply equal []
+  ✔ lexicographicSort       killed  by: every input interval lies inside some output interval; input and output cover the same real points; already separated intervals are unchanged; intervals sharing an endpoint merge
+      Counterexample: [[[-1,0],[-2,0]]]
+      AssertionError: expected [ [ -2, +0 ] ] to deeply equal []
+  ✔ touchingNotMerged       killed  by: output is sorted, valid, and strictly separated; permuting and duplicating input preserves the result; intervals sharing an endpoint merge
+      Counterexample: [[[3,3],[0,3]]]
+      AssertionError: expected 3 to be less than 3
+  ✔ mergesIntegerNeighbors  killed  by: input and output cover the same real points; already separated intervals are unchanged
+      Counterexample: [[[6,6],[0,5]]]
+      AssertionError: expected true to be false // Object.is equality
+  ✔ keepsLastEnd            killed  by: every input interval lies inside some output interval; input and output cover the same real points; permuting and duplicating input preserves the result
+      Counterexample: [[[0,1],[0,0]]]
+      AssertionError: expected [ [ +0, 1 ] ] to deeply equal []
+  ✔ dropsLast               killed  by: every input interval lies inside some output interval; input and output cover the same real points; merging twice equals merging once; already separated intervals are unchanged; intervals sharing an endpoint merge
+      Counterexample: [[[0,0]]]
+      AssertionError: expected [ [ +0, +0 ] ] to deeply equal []
+  ✔ aliasesInput            killed  by: merging does not modify the input or its intervals
+      Counterexample: [[[-3,14],[-3,14]]]
+      AssertionError: expected [ [ -3, 14 ], [ -3, 14 ] ] to deeply equal [ [ -3, +0 ], [ -3, 14 ] ]
+
+Mutation score: 7/7 killed (100%)
